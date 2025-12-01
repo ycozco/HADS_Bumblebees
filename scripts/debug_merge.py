@@ -1,8 +1,12 @@
 import pandas as pd
 import numpy as np
+import os
 
-HEALTH_FILE = "01_data_limpia_salud_mensual.csv"
-MINING_FILE = "02_data_limpia_mineria_unificada.csv"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_CSV = os.path.join(BASE_DIR, "data", "csv")
+
+HEALTH_FILE = os.path.join(DATA_CSV, "01_data_limpia_salud_mensual.csv")
+MINING_FILE = os.path.join(DATA_CSV, "02_data_limpia_mineria_unificada.csv")
 
 def debug_merge():
     print("Loading data...")

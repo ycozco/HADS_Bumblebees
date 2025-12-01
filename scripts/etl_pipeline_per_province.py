@@ -6,13 +6,16 @@ import seaborn as sns
 import os
 
 # CONFIGURACION
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_EXCEL = os.path.join(BASE_DIR, "data", "excel")
+
 FILES = {
-    "POBLACION": "POBLACION.xlsx",
-    "IRA": "IRA.xlsx",
-    "METALES": "COMPILADO METALES.xlsx",
-    "NO_METALES": "COMPILADO NO METALES.xlsx"
+    "POBLACION": os.path.join(DATA_EXCEL, "POBLACION.xlsx"),
+    "IRA": os.path.join(DATA_EXCEL, "IRA.xlsx"),
+    "METALES": os.path.join(DATA_EXCEL, "COMPILADO METALES.xlsx"),
+    "NO_METALES": os.path.join(DATA_EXCEL, "COMPILADO NO METALES.xlsx")
 }
-OUTPUT_IMG_DIR = "images_province"
+OUTPUT_IMG_DIR = os.path.join(BASE_DIR, "images_province")
 sns.set(style="whitegrid")
 
 # --- FUNCIONES DE LIMPIEZA ---

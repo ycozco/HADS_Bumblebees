@@ -5,8 +5,9 @@ import seaborn as sns
 import os
 
 # CONFIGURACION
-MASTER_FILE = "03_MASTER_DATASET_ANALISIS_IMPACTO.csv"
-IMG_DIR = "result_images"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MASTER_FILE = os.path.join(BASE_DIR, "data", "csv", "03_MASTER_DATASET_ANALISIS_IMPACTO.csv")
+IMG_DIR = os.path.join(BASE_DIR, "result_images")
 sns.set(style="whitegrid")
 
 def save_plot(name):

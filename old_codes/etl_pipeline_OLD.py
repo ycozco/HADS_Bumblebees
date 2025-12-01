@@ -145,17 +145,21 @@ import unidecode
 import os
 
 # --- CONFIGURATION ---
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_EXCEL = os.path.join(BASE_DIR, "data", "excel")
+DATA_CSV = os.path.join(BASE_DIR, "data", "csv")
+
 FILES = {
-    "POBLACION": "POBLACION.xlsx",
-    "IRA": "IRA.xlsx",
-    "METALES": "COMPILADO METALES.xlsx",
-    "NO_METALES": "COMPILADO NO METALES.xlsx"
+    "POBLACION": os.path.join(DATA_EXCEL, "POBLACION.xlsx"),
+    "IRA": os.path.join(DATA_EXCEL, "IRA.xlsx"),
+    "METALES": os.path.join(DATA_EXCEL, "COMPILADO METALES.xlsx"),
+    "NO_METALES": os.path.join(DATA_EXCEL, "COMPILADO NO METALES.xlsx")
 }
 
 OUTPUTS = {
-    "SALUD_CLEAN": "01_data_limpia_salud_mensual.csv",
-    "MINERIA_CLEAN": "02_data_limpia_mineria_unificada.csv",
-    "MASTER": "03_MASTER_DATASET_ANALISIS_IMPACTO.csv"
+    "SALUD_CLEAN": os.path.join(DATA_CSV, "01_data_limpia_salud_mensual.csv"),
+    "MINERIA_CLEAN": os.path.join(DATA_CSV, "02_data_limpia_mineria_unificada.csv"),
+    "MASTER": os.path.join(DATA_CSV, "03_MASTER_DATASET_ANALISIS_IMPACTO.csv")
 }
 
 # --- HELPER FUNCTIONS ---

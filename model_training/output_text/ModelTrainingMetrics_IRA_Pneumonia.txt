@@ -1,0 +1,9 @@
+DataFrame Columns: ['DISTRITO_NORM', 'PROVINCIA_NORM', 'ANIO', 'MES', 'ira_no_neumonia', 'neumonias_men5', 'neumonias_60mas', 'hospitalizados_men5', 'hospitalizados_60mas', 'defunciones_men5', 'defunciones_60mas', 'TOTAL_CASOS', 'POBLACION', 'TASA_INCIDENCIA', 'ESTRATO', 'PRODUCCION', '_merge']
+----- IRA NO NEUMONÍA -----
+MAE: 15.999264493063002
+R²: 0.9659133973459467
+
+----- NEUMONÍAS -----
+MAE: 0.48995467982842034
+R²: 0.8292988902939649
+['modelo_neumonias.pkl']

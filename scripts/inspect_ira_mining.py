@@ -1,10 +1,13 @@
 import pandas as pd
 import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_EXCEL = os.path.join(BASE_DIR, "data", "excel")
+
 files = [
-    "IRA.xlsx",
-    "COMPILADO METALES.xlsx",
-    "COMPILADO NO METALES.xlsx"
+    os.path.join(DATA_EXCEL, "IRA.xlsx"),
+    os.path.join(DATA_EXCEL, "COMPILADO METALES.xlsx"),
+    os.path.join(DATA_EXCEL, "COMPILADO NO METALES.xlsx")
 ]
 
 for f in files:

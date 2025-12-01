@@ -1,0 +1,6 @@
+First 10 predictions for 'neumonias' model on X_test2:
+[ 0.16203983  0.03472351  0.01980075  1.5319648   0.376809   -0.42809302
+  0.07577781  0.20331658  0.02994103  0.00605043]
+
+First 10 actual values from y_test2:
+[0. 0. 0. 1. 0. 0. 0. 1. 1. 0.]

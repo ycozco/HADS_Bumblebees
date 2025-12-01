@@ -80,4 +80,5 @@ def process_ira(file_path):
     return df_grouped
 
 if __name__ == "__main__":
-    process_ira("IRA.xlsx")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    process_ira(os.path.join(BASE_DIR, "data", "excel", "IRA.xlsx"))

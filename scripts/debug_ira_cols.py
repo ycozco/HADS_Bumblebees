@@ -1,8 +1,11 @@
 import pandas as pd
+import os
 
 def debug_ira_cols():
-    print("Reading IRA.xlsx...")
-    df = pd.read_excel("IRA.xlsx")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(BASE_DIR, "data", "excel", "IRA.xlsx")
+    print(f"Reading {path}...")
+    df = pd.read_excel(path)
     print("All Columns:")
     for c in df.columns:
         print(f"  {c}")

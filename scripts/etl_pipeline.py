@@ -1,18 +1,23 @@
 import pandas as pd
 import numpy as np
 import unidecode
+import os
 
 # CONFIGURACION
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_EXCEL = os.path.join(BASE_DIR, "data", "excel")
+DATA_CSV = os.path.join(BASE_DIR, "data", "csv")
+
 FILES = {
-    "POBLACION": "POBLACION.xlsx",
-    "IRA": "IRA.xlsx",
-    "METALES": "COMPILADO METALES.xlsx",
-    "NO_METALES": "COMPILADO NO METALES.xlsx"
+    "POBLACION": os.path.join(DATA_EXCEL, "POBLACION.xlsx"),
+    "IRA": os.path.join(DATA_EXCEL, "IRA.xlsx"),
+    "METALES": os.path.join(DATA_EXCEL, "COMPILADO METALES.xlsx"),
+    "NO_METALES": os.path.join(DATA_EXCEL, "COMPILADO NO METALES.xlsx")
 }
 OUTPUTS = {
-    "SALUD": "01_data_limpia_salud_mensual.csv",
-    "MINERIA": "02_data_limpia_mineria_unificada.csv",
-    "MASTER": "03_MASTER_DATASET_ANALISIS_IMPACTO.csv"
+    "SALUD": os.path.join(DATA_CSV, "01_data_limpia_salud_mensual.csv"),
+    "MINERIA": os.path.join(DATA_CSV, "02_data_limpia_mineria_unificada.csv"),
+    "MASTER": os.path.join(DATA_CSV, "03_MASTER_DATASET_ANALISIS_IMPACTO.csv")
 }
 
 # FUNCIONES AUXILIARES

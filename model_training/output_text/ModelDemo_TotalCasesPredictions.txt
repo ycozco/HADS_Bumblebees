@@ -1,0 +1,65 @@
+=== DEMOSTRACIÓN DEL MODELO TOTAL_CASOS ===
+
+       Distrito  Año  Mes  Producción Minera (TN)  Casos Reales Totales  Casos Predichos Totales
+ CERRO COLORADO 2023    2                 1768.00                 484.0               491.929993
+        TIABAYA 2022    5                    0.00                  80.0                93.120003
+     COCACHACRA 2021    8                 7728.63                  22.0                22.940001
+        ANDARAY 2022   10                    0.00                   3.0                 5.620000
+PUNTA DE BOMBON 2022    9                    0.00                  43.0                54.110001
+        LA JOYA 2022    1                    0.00                 292.0               282.750000
+ CERRO COLORADO 2024    9                  254.00                   NaN               154.740005
+        SACHACA 2021    8                    0.00                  24.0                21.110001
+       CHAPARRA 2021    8                  285.00                   7.0                 4.970000
+       SOCABAYA 2023    6                    0.00                 677.0               616.080017
+
+=== INTERPRETACIÓN SENCILLA ===
+
+CERRO COLORADO (2/2023)
+   - Casos reales: 484.0
+   - Modelo predice: 491.92999267578125
+   El modelo sobrestima un poco los casos, pero sigue una tendencia correcta.
+
+TIABAYA (5/2022)
+   - Casos reales: 80.0
+   - Modelo predice: 93.12000274658203
+   El modelo sobrestima un poco los casos, pero sigue una tendencia correcta.
+
+COCACHACRA (8/2021)
+   - Casos reales: 22.0
+   - Modelo predice: 22.940000534057617
+   El modelo acierta muy bien con una diferencia mínima.
+
+ANDARAY (10/2022)
+   - Casos reales: 3.0
+   - Modelo predice: 5.619999885559082
+   El modelo acierta muy bien con una diferencia mínima.
+
+PUNTA DE BOMBON (9/2022)
+   - Casos reales: 43.0
+   - Modelo predice: 54.11000061035156
+   El modelo sobrestima un poco los casos, pero sigue una tendencia correcta.
+
+LA JOYA (1/2022)
+   - Casos reales: 292.0
+   - Modelo predice: 282.75
+   El modelo subestima los casos, pero reconoce actividad epidemiológica.
+
+CERRO COLORADO (9/2024)
+   - Casos reales: nan
+   - Modelo predice: 154.74000549316406
+   No hay casos reales disponibles para comparar.
+
+SACHACA (8/2021)
+   - Casos reales: 24.0
+   - Modelo predice: 21.110000610351562
+   El modelo acierta muy bien con una diferencia mínima.
+
+CHAPARRA (8/2021)
+   - Casos reales: 7.0
+   - Modelo predice: 4.96999979019165
+   El modelo acierta muy bien con una diferencia mínima.
+
+SOCABAYA (6/2023)
+   - Casos reales: 677.0
+   - Modelo predice: 616.0800170898438
+   El modelo subestima los casos, pero reconoce actividad epidemiológica.
