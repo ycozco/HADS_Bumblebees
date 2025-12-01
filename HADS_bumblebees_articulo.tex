@@ -1,0 +1,108 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Análisis Espacio-Temporal de la Correlación entre Producción Minera e Incidencia de IRA en Arequipa: Un Enfoque de Ingeniería de Datos}
+
+\author{\IEEEauthorblockN{Equipo Bumblebees}
+\IEEEauthorblockA{\textit{Escuela Profesional de Ingeniería de Sistemas} \\
+\textit{Universidad Nacional de San Agustín (UNSA)}\\
+Arequipa, Perú}
+}
+
+\maketitle
+
+\begin{abstract}
+Este estudio presenta un análisis de datos integrado para evaluar la correlación entre la actividad minera y la incidencia de Infecciones Respiratorias Agudas (IRA) en la región de Arequipa durante el periodo 2021-2023. Mediante la consolidación de fuentes de datos heterogéneas provenientes del Ministerio de Energía y Minas (MINEM) y la Gerencia Regional de Salud (GERESA), se construyó un pipeline ETL robusto para superar desafíos de granularidad temporal y normalización geográfica. Los resultados indican una fuerte dominancia estacional (clima/invierno) sobre la producción minera directa en la generación de picos de IRA. Sin embargo, se observa una prevalencia basal sistemáticamente mayor en zonas mineras en comparación con zonas no mineras, sugiriendo un factor de riesgo subyacente independiente de la estacionalidad.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Minería, Salud Pública, Ingeniería de Datos, ETL, Arequipa, IRA.
+\end{IEEEkeywords}
+
+\section{Introducción}
+La región de Arequipa es un pilar fundamental de la minería en el Perú, pero esta actividad coexiste con constantes preocupaciones sociales respecto a su impacto en la salud pública. El conflicto social minero a menudo carece de evidencia cuantitativa accesible que permita validar o refutar las percepciones de riesgo de la población.
+
+En este contexto, el uso de Datos Abiertos Gubernamentales ofrece una oportunidad para auditar estas relaciones de manera objetiva. Este proyecto, desarrollado en el marco del curso de Herramientas Ágiles de Desarrollo de Software (HADS), busca procesar y cruzar datos epidemiológicos y productivos para generar evidencia estadística sobre la relación entre la extracción de minerales y las enfermedades respiratorias.
+
+\section{Metodología}
+
+\subsection{Arquitectura del Proyecto}
+El proyecto se estructuró siguiendo principios de ingeniería de datos moderna, separando claramente el código fuente (\texttt{src/}) de los datos crudos y procesados (\texttt{data/}). Se utilizaron scripts de Python para la orquestación del flujo de datos, empleando librerías como Pandas para la manipulación de datos y Matplotlib/Seaborn para la visualización.
+
+\subsection{Proceso ETL (Extracción, Transformación y Carga)}
+El desafío técnico principal fue la integración de fuentes dispares. Mientras que los datos de salud se reportan semanalmente por establecimiento (Semana Epidemiológica), la producción minera es mensual por titular.
+
+Se implementó un algoritmo de limpieza en \texttt{etl\_pipeline.py} para resolver el problema de los "Distritos Huérfanos". Este problema surgía debido a inconsistencias en la nomenclatura de los distritos entre las bases de datos (ej. "YURA" vs "DISTRITO DE YURA"). La solución implicó una normalización agresiva de texto:
+\begin{itemize}
+    \item Conversión a mayúsculas.
+    \item Eliminación de tildes y caracteres especiales (unidecode).
+    \item Estandarización de 'Ñ' a 'N'.
+\end{itemize}
+Esto permitió asegurar un cruce efectivo de las llaves primarias geográficas, logrando un solapamiento del 100\% en los distritos analizados.
+
+\subsection{Métrica de Normalización}
+Para comparar distritos con densidades poblacionales heterogéneas, se calculó la Tasa de Incidencia de IRA. Esta métrica evita sesgos poblacionales que ocurrirían si solo se contaran los casos absolutos. La fórmula utilizada es:
+
+\begin{equation}
+Tasa = \frac{Total Casos}{Poblacion} \times 1000
+\end{equation}
+
+Donde \textit{Total Casos} representa la suma mensual de IRA (sin neumonía), neumonías en menores de 5 años y neumonías en mayores de 60 años. \textit{Poblacion} es la proyección demográfica anual del distrito.
+
+\section{Resultados}
+
+\subsection{Correlación General}
+Inicialmente, se evaluó la correlación global entre el volumen de producción y la tasa de incidencia.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=\columnwidth]{result_images/04_scatter_correlation.png}}
+\caption{Dispersión: Producción Minera (Log) vs Tasa de Incidencia IRA.}
+\label{fig:scatter}
+\end{figure}
+
+La Fig. \ref{fig:scatter} muestra una dispersión significativa, lo que indica que no existe una relación lineal simple directa entre mayor producción y mayor incidencia inmediata. Esto sugiere la presencia de variables confusoras.
+
+\subsection{Análisis Micro (Nivel Distrital)}
+El análisis a nivel distrital revela la dinámica temporal específica de las zonas de influencia minera. La Fig. \ref{fig:yura} muestra la relación en el distrito de Yura, uno de los mayores productores.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=\columnwidth]{result_images/05_dual_axis_YURA.png}}
+\caption{Dinámica Temporal en Yura: Producción Minera (Barras) vs Tasa de Incidencia IRA (Línea).}
+\label{fig:yura}
+\end{figure}
+
+Se observa una falta de sincronía inmediata entre los picos de producción y los picos de enfermedades respiratorias. Los aumentos en la producción no son seguidos inmediatamente por brotes de IRA, lo que debilita la hipótesis de una causalidad directa a corto plazo.
+
+\subsection{Análisis Macro (Tendencia Comparativa)}
+Para evaluar el impacto sistémico, se comparó la tasa de incidencia promedio de todos los distritos con actividad minera ("Expuestos") contra aquellos sin actividad ("Control").
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=\columnwidth]{result_images/07_comparative_trend.png}}
+\caption{Comparativo de Tendencias: Distritos Mineros vs No Mineros.}
+\label{fig:trend}
+\end{figure}
+
+Como se aprecia en la Fig. \ref{fig:trend}, ambas curvas muestran una sincronía estacional notable, elevándose juntas durante los meses de invierno. Esto confirma que el clima es el "driver" principal de las IRA. Sin embargo, es crucial notar el "Offset": la línea de los distritos mineros (roja) se mantiene sistemáticamente por encima de la línea de control (azul). Esto sugiere que, si bien la minería no dicta la estacionalidad, podría estar contribuyendo a un riesgo base elevado en estas poblaciones.
+
+\section{Discusión}
+Los resultados sugieren que la relación entre minería y salud respiratoria en Arequipa es compleja. La fuerte estacionalidad observada en ambos grupos (mineros y no mineros) indica que el friaje y las condiciones climáticas son los determinantes agudos de las IRA. No obstante, el "offset" observado en la tendencia comparativa no debe ser ignorado; podría indicar factores ambientales crónicos (como polvo en suspensión) o determinantes sociales de la salud propios de las zonas mineras que aumentan la vulnerabilidad basal de la población.
+
+\section{Conclusión}
+Este estudio demuestra la viabilidad de utilizar datos abiertos para la vigilancia de salud pública ambiental. Se concluye que el clima ejerce una dominancia estacional sobre la incidencia de IRA, superando la correlación directa con la producción minera mensual.
+
+Se recomienda para futuros trabajos la integración de redes de sensores de Calidad de Aire (PM10, PM2.5) para validar si el "offset" de incidencia en zonas mineras está correlacionado con una peor calidad del aire, permitiendo así pasar de un análisis de correlación a uno de causalidad.
+
+\end{document}
